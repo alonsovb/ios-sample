@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface MyTableViewController : UITableViewController
+{
+    NSMutableArray *colorNames;
+    NSMutableArray *details;
+}
+
+@property (nonatomic, retain) NSMutableArray *colorNames;
+@property (nonatomic, retain) NSMutableArray *details;
 
 @end

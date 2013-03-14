@@ -13,6 +13,7 @@
 @end
 
 @implementation MyTableViewController
+@synthesize colorNames, details;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,11 +28,12 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.colorNames = [[NSMutableArray alloc] initWithObjects:@"Red", @"Green", @"Yellow", @"Blue", nil];
+    self.details    = [[NSMutableArray alloc] initWithObjects:@"...like roses",
+                       @"...like leaves", @"...like the sun", @"...like the sky", nil];
+    [self.colorNames addObject:@"White"];
+    [self.details addObject:@"...like snow"];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +53,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 8;
+    return [self.colorNames count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,7 +62,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    [[cell textLabel] setText:[NSString stringWithFormat:@"%d", indexPath.row]];
+    [[cell textLabel] setText:[self.colorNames objectAtIndex:indexPath.row]];
+    [[cell detailTextLabel] setText:[self.details objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -115,6 +118,7 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    [self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 }
 
 @end
